@@ -1,18 +1,17 @@
-const line = require('@line/bot-sdk');
-const token = 'CJjG80i3woYXfPUF8ttj8FhCiESBGo4XxtaKmGmlG86gLzjGLamEBDopN4Hc64udxnfn4jUwwLV2UD6/woghTchN+RSZWCza2PQrIbyNXtEKg34/olmkGzrEdqtCJpavRuFgzJzR5nQpuIcXYBp1IQdB04t89/1O/w1cDnyilFU=';
-const client = new line.Client({
-  channelAccessToken: token
-});
+const express = require('express')
+const middleware = require('@line/bot-sdk').middleware
+//const token = 'CJjG80i3woYXfPUF8ttj8FhCiESBGo4XxtaKmGmlG86gLzjGLamEBDopN4Hc64udxnfn4jUwwLV2UD6/woghTchN+RSZWCza2PQrIbyNXtEKg34/olmkGzrEdqtCJpavRuFgzJzR5nQpuIcXYBp1IQdB04t89/1O/w1cDnyilFU=';
 
-const message = {
-  type: 'text',
-  text: 'Hello World!'
-};
 
-client.replyMessage(token, message)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    // error handling
-  });
+const app = express()
+
+const config = {
+  channelAccessToken: 'CJjG80i3woYXfPUF8ttj8FhCiESBGo4XxtaKmGmlG86gLzjGLamEBDopN4Hc64udxnfn4jUwwLV2UD6/woghTchN+RSZWCza2PQrIbyNXtEKg34/olmkGzrEdqtCJpavRuFgzJzR5nQpuIcXYBp1IQdB04t89/1O/w1cDnyilFU=',
+  //channelSecret: 'YOUR_CHANNEL_SECRET'
+}
+
+app.post('/webhook', middleware(config), (req, res) => {
+  res.json(req.body.events) // req.body will be webhook event object
+})
+
+app.listen(8080)
