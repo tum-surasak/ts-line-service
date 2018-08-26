@@ -44,6 +44,8 @@ app.post('/webhook', (req, res) => {
 })
 app.listen(port, () => console.log('http://localhost:' + port + '/db'))
 function reply(cmd, reply_token) {
+    cmd = cmd.replace('/bot')
+    help = 't\r\nn'
     let token = 'CJjG80i3woYXfPUF8ttj8FhCiESBGo4XxtaKmGmlG86gLzjGLamEBDopN4Hc64udxnfn4jUwwLV2UD6/woghTchN+RSZWCza2PQrIbyNXtEKg34/olmkGzrEdqtCJpavRuFgzJzR5nQpuIcXYBp1IQdB04t89/1O/w1cDnyilFU='
     let headers = {
         'Content-Type': 'application/json',
