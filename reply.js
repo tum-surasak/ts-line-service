@@ -36,7 +36,7 @@ app.post('/webhook', (req, res) => {
     newObject = req.body.events[0]
     db.ref(current_path + '/' + newKey).set(newObject)
     reply(reply_token)
-    res.send(reply_token);
+    //res.send(reply_token);
     res.sendStatus(200)
 })
 app.listen(port, () => console.log('http://localhost:' + port + '/db'))
@@ -49,16 +49,9 @@ function reply(reply_token) {
     let body = JSON.stringify({
         replyToken: reply_token,
         messages: [{
-            type: 'text',
-            text: reply_token
-        },
-        {
-            type: 'text',
-            text: 'Hello'
-        },
-        {
-            type: 'text',
-            text: 'How are you?'
+            "type": "sticker",
+            "packageId": "1",
+            "stickerId": "1"
         }]
     })
     request.post({
